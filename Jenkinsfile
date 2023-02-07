@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
            steps{
-                git branch: 'main', credentialsId: 'Github', url: 'git@github.com:fljonllc/terraform.git'
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-private-key', url: 'git@github.com:fljonllc/terraform.git']])
             }
         }
         stage("Terraform Format Check") {

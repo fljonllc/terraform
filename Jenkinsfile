@@ -9,25 +9,25 @@ pipeline {
                 git branch: 'main', credentialsId: 'Github', url: 'https://github.com/fljonllc/terraform.git'
             }
         }
-        stage('Terraform Format Check') {
+        stage("Terraform Format Check") {
             steps{
-                sh 'terraform fmt'
+                sh ('terraform fmt')
             }
         }
-        stage('Terraform Init') {
+        stage("Terraform Init") {
             steps{
-                sh 'terraform init'
+                sh ('terraform init')
             }
         }
         
         stage('Terraform Plan') {
             steps{
-                sh 'terraform plan'
+                sh ('terraform plan')
             }
         }
         stage('Terraform Apply') {
             steps{
-                sh 'terraform apply --auto-approve'
+                sh ('terraform apply --auto-approve')
             }
         }
     }

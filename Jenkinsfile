@@ -4,22 +4,28 @@ pipeline {
        terraform 'terraform'
     }
     stages {
-        stage('Git checkout') {
+        stage('Git Checkout') {
            steps{
                 git branch: 'main', credentialsId: 'Github', url: 'https://github.com/fljonllc/terraform.git'
             }
         }
-        stage('terraform format check') {
+        stage('Terraform Format Check') {
             steps{
                 sh 'terraform fmt'
             }
         }
-        stage('terraform Init') {
+        stage('Terraform Init') {
             steps{
                 sh 'terraform init'
             }
         }
-        stage('terraform apply') {
+        
+        stage('Terraform Plan') {
+            steps{
+                sh 'terraform plan'
+            }
+        }
+        stage('Terraform Apply') {
             steps{
                 sh 'terraform apply --auto-approve'
             }

@@ -20,8 +20,7 @@ pipeline {
                     $class: 'AmazonWebServicesCredentialsBinding',
                     credentialsId: 'Jenkins-Aws-Cred',
                     accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
-                }
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']])
             }
         }
         stage("Terraform Init") {

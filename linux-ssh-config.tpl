@@ -1,4 +1,4 @@
-cat << EOF >> ~/.ssh/config
+cat << EOF >> terraform/config
 
 Host ${hostname}
   HostName ${hostname}

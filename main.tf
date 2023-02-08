@@ -89,7 +89,7 @@ resource "aws_security_group" "ntc_sg" {
 
 resource "aws_key_pair" "ntc_auth" {
   key_name   = "ntckey"
-  public_key = file("~/.ssh/ntckey.pub")
+  public_key = ("terraform/ntckey.pub")
 }
 
 # Configure the AWS CE2
@@ -115,7 +115,7 @@ resource "aws_instance" "dev_node" {
     command = templatefile("${var.host_os}-ssh-config.tpl", {
       hostname     = self.public_ip,
       user         = "ec2-user",
-      identityfile = "~/.ssh/ntckey"
+      identityfile = "terraform/ntckey"
     })
     interpreter = var.host_os == "linux" ? ["bash", "-c"] : ["powershell", "command"]
   }

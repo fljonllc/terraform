@@ -8,7 +8,5 @@ terraform {
 
 provider "aws" {
   region = "us-eat-1
-  access_key = ""
-  secret_key = ""
   # Configuration options
 }

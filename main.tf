@@ -89,7 +89,7 @@ resource "aws_security_group" "ntc_sg" {
 
 resource "aws_key_pair" "ntc_auth" {
   key_name   = "ntckey"
-  public_key = ("terraform/ntckey.pub")
+  public_key = "terraform/ntckey.pub"
 }
 
 # Configure the AWS CE2
@@ -100,7 +100,7 @@ resource "aws_instance" "dev_node" {
   key_name               = aws_key_pair.ntc_auth.id
   vpc_security_group_ids = [aws_security_group.ntc_sg.id]
   subnet_id              = aws_subnet.ntc_public_subnet.id
-  user_data              = file("userdata.tpl")
+  user_data              = "terrafrom/userdata.tpl"
 
   root_block_device {
     volume_size = 10

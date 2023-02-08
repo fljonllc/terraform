@@ -14,7 +14,7 @@ pipeline {
                 sh ('terraform fmt')
             }
         }
-        stage("AWS Credential"){
+        stage("AWS Demo"){
             steps{
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',

@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
            steps{
-               checkout([$class: ‘GitSCM’, branches: [[name: ‘*/main’]], extensions: [], userRemoteConfigs: [[url: ‘https://github.com/fljonllc/terraform.git‘]]])
+               git branch: 'main', credentialsId: 'github-private-key', url: 'https://github.com/fljonllc/terraform.git'
             }
         }
         stage (“terraform init”) {

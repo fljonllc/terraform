@@ -3,7 +3,9 @@ pipeline {
     stages {
         stage('Git Checkout') {
            steps{
-               git branch: 'main', credentialsId: 'github-private-key', url: 'https://github.com/fljonllc/terraform.git'
+               withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
+    // some block
+}
             }
         }
         stage (“terraform init”) {

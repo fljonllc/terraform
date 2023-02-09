@@ -1,42 +1,34 @@
 pipeline {
     agent any
-    tools {
-        terraform 'terraform'
-        }stages {
-        stage('Git Checkout') {
+
+    environment {
+        AWS_REGION = "us-west-1"
+    }
+
+    stages {
+        stage("Checkout") {
             steps {
-                git branch: 'main', credentialsId: 'Git', url: 'https://github.com/fljonllc/terraform.git'
+                checkout scm
             }
         }
-        stage('Terraform Init') {
+
+        stage("Configure AWS credentials") {
             steps {
-                sh 'terraform init'
-            }
-        }
-        stage('Terraform Plan') {
-            steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
-                {
-                sh 'terraform plan'
-                }
-            }
-            }
-        stage('Terraform Apply') {
-            steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
-                {
-                
-                sh 'terraform apply --auto-approve'
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                ]]) {
+                    sh 'echo AWS credentials configured'
                 }
             }
         }
-        stage('Terraform Destroy') {
+
+        stage("Deploy Terraform") {
             steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'aws_credentials', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
-                {
-                
-                sh 'terraform destroy --auto-approve'
-                }
+                sh 'terraform init -input=false'
+                sh "terraform plan -input=false -var 'aws_region=${AWS_REGION}'"
+                sh 'terraform apply -input=false -auto-approve'
             }
         }
     }

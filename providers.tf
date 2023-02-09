@@ -7,6 +7,6 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-eat-1
+  region = "us-eat-1"
   # Configuration options
 }

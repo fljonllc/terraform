@@ -28,7 +28,7 @@ pipeline {
         stage("Deploy Terraform") {
             steps {
                 sh 'terraform init -input=false'
-                sh "terraform plan -input=false -var 'aws_region=${AWS_REGION}'"
+                sh 'terraform plan -input=false'
                 sh 'terraform apply -input=false -auto-approve'
             }
         }

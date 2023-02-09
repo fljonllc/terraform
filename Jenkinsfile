@@ -27,9 +27,9 @@ pipeline {
 
         stage("Deploy Terraform") {
             steps {
-                sh 'terraform init -input=false'
-                sh 'terraform plan -input=false'
-                sh 'terraform apply -input=false -auto-approve'
+                sh 'terraform init'
+                sh 'terraform plan'
+                sh 'terraform apply -auto-approve'
             }
         }
     }

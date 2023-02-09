@@ -8,5 +8,6 @@ terraform {
 
 provider "aws" {
   region = "us-eat-1"
+  profile = "default"
   # Configuration options
 }

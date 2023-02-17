@@ -8,6 +8,6 @@ terraform {
 
 provider "aws" {
   region = "us-eat-1"
-  profile = "Jenkins-Aws-Cred"
+ # profile = "Jenkins-Aws-Cred"
   
 }

@@ -111,14 +111,14 @@ resource "aws_instance" "dev_node" {
   }
   # Configure the Provisioner
 
-  provisioner "local-exec" {
-    command = templatefile("${var.host_os}-ssh-config.tpl", {
-      hostname     = self.public_ip,
-      user         = "ec2-user",
-      identityfile = "terraform/ntckey"
-    })
-    interpreter = var.host_os == "linux" ? ["bash", "-c"] : ["powershell", "command"]
-  }
+ # provisioner "local-exec" {
+ #   command = templatefile("${var.host_os}-ssh-config.tpl", {
+ #     hostname     = self.public_ip,
+ #     user         = "ec2-user",
+ #     identityfile = "terraform/ntckey"
+ #   })
+ #   interpreter = var.host_os == "linux" ? ["bash", "-c"] : ["powershell", "command"]
+ # }
 
 }
 

@@ -5,7 +5,7 @@ pipeline {
         AWS_REGION = "us-west-1"
     }
     stages{
-        stage("AWS Demo"){
+        stage("AWS Credentials"){
             steps{
                 withCredentials([[
                     $class: 'AmazonWebServicesCredentialsBinding',

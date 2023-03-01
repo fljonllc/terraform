@@ -11,7 +11,18 @@ pipeline {
                 checkout scm
             }
         }
-
+        
+        stage("Terraform Init") {
+            steps {
+                sh 'terraform init'
+            }
+        }
+         stage("Terraform Plan") {
+            steps {
+                sh 'terraform plan'
+            }
+        }
+        
         stage("Configure AWS credentials") {
             steps {
                 withCredentials([[
@@ -22,17 +33,6 @@ pipeline {
                 ]]) {
                     sh 'echo AWS credentials configured'
                 }
-            }
-        }
-
-        stage("Terraform Init") {
-            steps {
-                sh 'terraform init'
-            }
-        }
-         stage("Terraform Plan") {
-            steps {
-                sh 'terraform plan'
             }
         }
          stage("Terraform Apply") {

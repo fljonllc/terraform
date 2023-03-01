@@ -22,19 +22,7 @@ pipeline {
                 sh 'terraform plan'
             }
         }
-        
-        stage("Configure AWS credentials") {
-            steps {
-                withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: 'Jenkins-Aws-Cred',
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-                ]]) {
-                    sh 'echo AWS credentials configured'
-                }
-            }
-        }
+
          stage("Terraform Apply") {
             steps {
                 sh 'terraform apply -auto-approve'

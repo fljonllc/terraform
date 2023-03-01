@@ -1,5 +1,6 @@
 # Configure the AWS VPC
 provider "aws" {
+  profile = default
   region     = "us-east-1"
 }
 

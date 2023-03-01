@@ -1,8 +1,4 @@
 # Configure the AWS VPC
-provider "aws" {
-  version = "~> 4.0"
-  region     = "us-east-1"
-}
 
 resource "aws_vpc" "ntc_vpc" {
   cidr_block           = "10.123.0.0/16"

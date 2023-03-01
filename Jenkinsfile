@@ -14,7 +14,6 @@ pipeline {
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
             }
         }
-    }
         stage("Checkout") {
             steps {
                 checkout scm
@@ -38,3 +37,4 @@ pipeline {
             }
         }
     }
+}
